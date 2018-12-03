@@ -1,26 +1,52 @@
 <?php
-class RssDisplay extends Model {
+class RssDisplay extends Model{
 
-  protected $feed_url;
-  protected $num_feed_items;
 
-  public function __construct($url){
-    parent::__construct();
 
-    $this->feed_url = $url;
-  }
+    protected $db;
 
-  public function getFeedItems($num_feed_items) {
-    $items = simplexml_load_file($this->feed_url);
-  	foreach ($rss as $key) {
-  		echo $item->title."<br/>".$item->link."<hr/>";
-      echo $item->description."<br/>";
-  	}
-    return $items;
-  }
+    protected $feed_url;
+    protected $num_feed;
 
-  public function getChannelInfo() {
+    public function __construct($url){
 
-  }
+        parent::__construct();
+
+        $this->feed_url = $url;
+
+    }
+
+    public function getFeedItems($num_feed_items=0) {
+
+        $this->num_feed = $num_feed_items;
+
+        $rss = simplexml_load_file($this->feed_url);
+
+        $x = 0;
+        $rss_work = array();
+
+        if($this->num_feed > 0) {
+            foreach($rss->channel->item as $data) {
+                $rss_work[] = $data;
+                if($x >= ($this->num_feed - 1)) {
+                    break;
+                }
+                $x++;
+            }
+            return $rss_work;
+        }
+        else {
+            return $rss;
+        }
+
+    }
+
+    public function getChannelInfo() {
+
+        $rss = simplexml_load_file($this->feed_url);
+
+        return ($rss->channel);
+
+    }
 
 }

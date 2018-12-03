@@ -1,3 +1,3 @@
 <?php
-  echo $response;
+echo $response;
 ?>

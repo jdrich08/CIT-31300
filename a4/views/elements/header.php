@@ -56,7 +56,7 @@
               <li class="active"><a href="<?php echo BASE_URL?>">Home</a></li>
               <li><a href="<?php echo BASE_URL?>blog/">Blog</a></li>
               <li><a href="<?php echo BASE_URL?>members/">Members</a></li>
-              <li><a href="<?php echo BASE_URL?>weather/">Weather</a></li>
+                <li><a href="<?php echo BASE_URL?>weather/">Weather</a></li>
 
             </ul>
 
@@ -75,7 +75,7 @@
                                 if($u->isAdmin()) {
                                     ?>
                                     <li>
-                                        <a href="<?php echo BASE_URL?>manageposts/">Add Blog Post</a>
+                                        <a href="<?php echo BASE_URL?>manageposts/">Manage Posts</a>
                                     </li>
                                 <?php
                                 }

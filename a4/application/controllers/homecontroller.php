@@ -3,15 +3,29 @@
 class HomeController extends Controller{
 
 	public function index(){
-		$feed = "https://www.reddit.com/r/news/.rss";
-		$rss = new RssDisplay($feed);
-		$num_feed_items = 4;
+        $rss = new RssDisplay("https://www.techspot.com/backend.xml");
 
-		$feed_data = $rss->getFeedItems($num_feed_items);
+        $html = "";
 
-		$channel_title = $feed_data->channel->title;
+        $data = $rss->getFeedItems(8);
+        $channel = $rss->getChannelInfo();
 
-		$this->set('rss_title',$channel_title);
+        $feed_title = $channel->title;
+
+        $this->set('title',$feed_title);
+
+        foreach($data as $value) {
+            $read_date = strtotime($value->pubDate);
+            date_default_timezone_set('America/New_York');
+            $read_date =  date("F j, Y, g:i a",$read_date);
+
+            $html.= '<div><h4><a href="'.$value->link.'">'.$value -> title.'</a> ('.$read_date.')</h4><p>'.$value->description.'</p></div><hr/>';
+        }
+
+
+
+        $this->set('data',$html);
+
 	}
 
 }

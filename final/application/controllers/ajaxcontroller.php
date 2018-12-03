@@ -18,10 +18,36 @@ class AjaxController extends Controller{
         $this->set('response',$post['content']);
     }
 
-		public function deleteComment() {
+		public function getComments() {
+			$pID = $_POST['pID'];
 			$this->commentObject = new Comment();
-			$response = $this->commentObject->deleteComment($_GET['commentID']);
-			$this->set('response',$response);
+			$comments = $this->commentObject->getComments($pID);
+			$this->set('comments',$comments);
+		}
+
+		public function deleteComment() {
+			$cID = $_POST['comID']
+			$this->commentObject = new Comment();
+			$message = $this->commentObject->deleteComment($cID);
+			$this->set('response',$message);
+		}
+
+		public function addComment() {
+			$this->commentObject = new Comment();
+			$message = $this->commentObject->postComment($_POST['data']);
+			$this->set('response',$message);
+		}
+
+		public function addPost() {
+
+		}
+
+		public function deletePost() {
+
+		}
+
+		public function deleteUser() {
+
 		}
 
 }

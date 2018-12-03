@@ -33,47 +33,59 @@
 
    </script>
 
-
-
-
-<?php
-}
-?>
+   <?php
+    }
+    ?>
 
    <script>
-       $(document).ready(function() {
-          var pID = {id:$('#pid').val()};
-
-           $('.post-loader').click(function(event) {
-               event.preventDefault();
-               var el = $(this);
-
-               $.ajax({
-                  url:el.attr('href'),
-                  type:'GET',
-                  success:function(data) {
-                    el.parent().append(data);
-                    el.remove();
-                  }
-                });
-           });
-
-           $('.btn-delete').click(function(event) {
-               event.preventDefault();
-               var el = $(this);
-               var comID = $(this).val();
-               $.ajax({
-                 url: "<?php echo BASE_URL;?>ajax/deleteComment/?commentID="+comID,
-                 type: "GET",
-                 success: function(data) {
-                   el.parent().remove();
-                 }
-               });
-           });
+   $(document).ready(function(){
+     $('.post-loader').click(function(event){
+       event.preventDefault();
+       var el = $(this);
+       $.ajax({
+         url:el.attr('href'),
+         type:'GET',
+         success:function(data){
+           el.parent().append(data);
+           el.remove();
+         }
        });
+     });
+   });
 
+   $(document).ready(function(){
+     $('.btn-delete-comment').click(function(e){
+       e.preventDefault();
+       var el = $(this);
+       var comID = $(this).val();
+       $.ajax({
+         url: "<?php echo BASE_URL;?>ajax/deleteComment",
+         type:"POST",
+         data: comID,
+         success: function() {
+           el.parent().remove();
+         }
+       });
+     });
 
-    </script>
+     $('.submit-comment').click(function(e){
+       e.preventDefault();
+       var data = {data:$('#commentText').val(),
+                   date: $('#date').val(),
+                   postid: $('#pid').val(),
+                   userid: $('#uid').val()
+                   }
+       $.ajax({
+         url:"<?php echo BASE_URL;?>ajax/postComment",
+         type: "POST",
+         data: data,
+         success: function(){
+
+         }
+       });
+     });
+   });
+   </script>
 
 
 

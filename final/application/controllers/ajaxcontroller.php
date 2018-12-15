@@ -37,18 +37,6 @@ class AjaxController extends Controller{
 			$this->set('response',$message);
 		}
 
-		public function addPost() {
-
-		}
-
-		public function deletePost() {
-
-		}
-
-		public function deleteUser() {
-
-		}
-
 }
 
 ?>

@@ -19,14 +19,13 @@ class AjaxController extends Controller{
     }
 
 		public function getComments() {
-			$pID = $_POST['pID'];
 			$this->commentObject = new Comment();
-			$comments = $this->commentObject->getComments($pID);
-			$this->set('comments',$comments);
+			$comments = $this->commentObject->getComments($_POST['id']);
+			$this->set('response',$comments);
 		}
 
 		public function deleteComment() {
-			$cID = $_POST['comID']
+			$cID = $_POST['comID'];
 			$this->commentObject = new Comment();
 			$message = $this->commentObject->deleteComment($cID);
 			$this->set('response',$message);

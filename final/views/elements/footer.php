@@ -54,19 +54,38 @@
    });
 
    $(document).ready(function(){
-     $('.btn-delete-comment').click(function(e){
-       e.preventDefault();
-       var el = $(this);
-       var comID = $(this).val();
+     var pID = {id: <?php echo $pID;?>};
+     if(pID.id != 'undefined'){
+       getComments();
+     }
+
+     function getComments(){
        $.ajax({
-         url: "<?php echo BASE_URL;?>ajax/deleteComment",
-         type:"POST",
-         data: comID,
-         success: function() {
-           el.parent().remove();
+         url: "<?php echo BASE_URL;?>ajax/getComments",
+         data: pID,
+         type: "POST",
+         success: function(response){
+           $('#commentMain').html('').append(response);
+           console.log(response);
+
+           $('.btn-delete-comment').click(function(e){
+             e.preventDefault();
+             var el = $(this);
+             var comID = el.val();
+
+             el.parent().slideUp(function(){
+               el.remove();
+             });
+
+             $.ajax({
+               url: "<?php echo BASE_URL;?>ajax/deleteComment",
+               type:"POST",
+               data: comID
+             });
+           });
          }
        });
-     });
+     }
 
      $('.submit-comment').click(function(e){
        e.preventDefault();

@@ -33,6 +33,10 @@ if( is_array($post) ) {
         ?>
       </div>
 
+      <div id="commentMain">
+
+      </div>
+
       <?php
         if($u->isRegistered()) {
       ?>

@@ -18,7 +18,8 @@ class Comment extends Model{
         return $comments;
     }
 
-    public function postComment($data){
+    public function postComment($date, $uID, $pID){
+      $data = array($date, $uID, $pID);
       $sql='INSERT INTO comments (commentText,date,postID,uID) VALUES (?,?,?,?)';
       $this->db->execute($sql,$data);
       $message = 'Comment added.';

@@ -33,12 +33,16 @@ if( is_array($post) ) {
         ?>
       </div>
 
+      <div id="commentMain">
+
+      </div>
+
       <?php
         if($u->isRegistered()) {
       ?>
         <div class="container">
           <div class="form-group">
-            <form action="<?php echo BASE_URL?>blog/addComment/" method="post">
+            <form action="<?php echo BASE_URL?>blog/addComment" method="post">
               <label for="comment">Comment:</label>
               <textarea class="form-control" rows="5" id="commentText" name="commentText" style="min-width: 100%"></textarea>
               <?php date_default_timezone_set('America/Indiana/Indianapolis');?>
